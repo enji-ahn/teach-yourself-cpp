@@ -1,0 +1,11 @@
+image: gcc-cmake:gcc-8
+
+before_script:
+    - cd src
+    - cmake .
+    
+build:
+    stage: build
+    script: 
+        - pwd
+        - make
