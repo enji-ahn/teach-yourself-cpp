@@ -1,4 +1,4 @@
-image: gcc-cmake:gcc-8
+image: rikorose/gcc-cmake:gcc-8
 
 before_script:
     - cd src
