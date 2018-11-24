@@ -1,8 +1,8 @@
 image: rikorose/gcc-cmake:gcc-8
 
 before_script:
-    - cd src
-    - cmake .
+    - cd build
+    - cmake ..
     
 build:
     stage: build
