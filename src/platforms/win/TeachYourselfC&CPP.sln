@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Integrating Mocking with C+
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "std_any", "std_any\std_any.vcxproj", "{84B76610-DB73-4ECB-97F2-DCE5891CE7E0}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "asio_check_when_the_connection_is_made", "asio_check_when_the_connection_is_made\asio_check_when_the_connection_is_made.vcxproj", "{55FE62D2-B596-41E4-A8DD-129A94EF2610}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{84B76610-DB73-4ECB-97F2-DCE5891CE7E0}.Release|x64.Build.0 = Release|x64
 		{84B76610-DB73-4ECB-97F2-DCE5891CE7E0}.Release|x86.ActiveCfg = Release|Win32
 		{84B76610-DB73-4ECB-97F2-DCE5891CE7E0}.Release|x86.Build.0 = Release|Win32
+		{55FE62D2-B596-41E4-A8DD-129A94EF2610}.Debug|x64.ActiveCfg = Debug|x64
+		{55FE62D2-B596-41E4-A8DD-129A94EF2610}.Debug|x64.Build.0 = Debug|x64
+		{55FE62D2-B596-41E4-A8DD-129A94EF2610}.Debug|x86.ActiveCfg = Debug|Win32
+		{55FE62D2-B596-41E4-A8DD-129A94EF2610}.Debug|x86.Build.0 = Debug|Win32
+		{55FE62D2-B596-41E4-A8DD-129A94EF2610}.Release|x64.ActiveCfg = Release|x64
+		{55FE62D2-B596-41E4-A8DD-129A94EF2610}.Release|x64.Build.0 = Release|x64
+		{55FE62D2-B596-41E4-A8DD-129A94EF2610}.Release|x86.ActiveCfg = Release|Win32
+		{55FE62D2-B596-41E4-A8DD-129A94EF2610}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
