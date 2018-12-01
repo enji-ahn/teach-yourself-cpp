@@ -23,7 +23,7 @@
     <ProjectGuid>{55FE62D2-B596-41E4-A8DD-129A94EF2610}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>asiocheckwhentheconnectionismade</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
