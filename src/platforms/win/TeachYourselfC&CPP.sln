@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "std_any", "std_any\std_any.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "asio_check_when_the_connection_is_made", "asio_check_when_the_connection_is_made\asio_check_when_the_connection_is_made.vcxproj", "{55FE62D2-B596-41E4-A8DD-129A94EF2610}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "asio_listen_stopped_by_io_service", "asio_listen_stopped_by_io_service\asio_listen_stopped_by_io_service.vcxproj", "{939A7401-C600-4EA4-91FD-20DD6A3309BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{55FE62D2-B596-41E4-A8DD-129A94EF2610}.Release|x64.Build.0 = Release|x64
 		{55FE62D2-B596-41E4-A8DD-129A94EF2610}.Release|x86.ActiveCfg = Release|Win32
 		{55FE62D2-B596-41E4-A8DD-129A94EF2610}.Release|x86.Build.0 = Release|Win32
+		{939A7401-C600-4EA4-91FD-20DD6A3309BD}.Debug|x64.ActiveCfg = Debug|x64
+		{939A7401-C600-4EA4-91FD-20DD6A3309BD}.Debug|x64.Build.0 = Debug|x64
+		{939A7401-C600-4EA4-91FD-20DD6A3309BD}.Debug|x86.ActiveCfg = Debug|Win32
+		{939A7401-C600-4EA4-91FD-20DD6A3309BD}.Debug|x86.Build.0 = Debug|Win32
+		{939A7401-C600-4EA4-91FD-20DD6A3309BD}.Release|x64.ActiveCfg = Release|x64
+		{939A7401-C600-4EA4-91FD-20DD6A3309BD}.Release|x64.Build.0 = Release|x64
+		{939A7401-C600-4EA4-91FD-20DD6A3309BD}.Release|x86.ActiveCfg = Release|Win32
+		{939A7401-C600-4EA4-91FD-20DD6A3309BD}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
