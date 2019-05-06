@@ -21,7 +21,7 @@ C 언어 학습을 위한 프로젝트
             /linux          //Linux platform
             /macosx         //Mac OS X
             /win            //Windows platform
-            CMakeLists.txt 
+        CMakeLists.txt 
 
         /tools              //External binaries
 

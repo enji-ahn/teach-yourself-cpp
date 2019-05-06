@@ -1,13 +1,12 @@
-﻿// asio_listen_stopped_by_io_service.cpp : This file contains the 
+// asio_listen_stopped_by_io_service.cpp : This file contains the
 // 'main' function. Program execution begins and ends there.
 //
 
 // asio 를 사용해서 async_accept 를 호출해 놓은 상황에서,
 // io_service.stop() 을 호출했다면, on_accept 가 error 로 호출되는지 확인
 
-#include "pch.h"
-#include <iostream>
-#include "asio_listen_stopped_by_io_service.h"
+#include "asio_listen_stopped_by_io_service.hpp"
+#include <boost/assert.hpp>
 
 using namespace boost::asio;
 using namespace boost::asio::ip;
@@ -42,11 +41,11 @@ boost::shared_ptr<boost::thread> start_listen_thread()
 {
 	tcp::endpoint ep{ tcp::v4(), 30338 };
 	auto acceptor = boost::make_shared<tcp::acceptor>(service, ep);
-	_ASSERT(acceptor != nullptr);
+	BOOST_ASSERT(acceptor != nullptr);
 	acceptor->listen();
 
 	auto socket = boost::make_shared<tcp::socket>(service);
-	_ASSERT(socket != nullptr);
+	BOOST_ASSERT(socket != nullptr);
 
 	acceptor->async_accept(*socket,
 		boost::bind(on_accept,
@@ -59,7 +58,7 @@ boost::shared_ptr<boost::thread> start_listen_thread()
 		service.run();
 		std::cout << "io_service stopped" << std::endl;
 	});
-	_ASSERT(io_thread != nullptr);
+	BOOST_ASSERT(io_thread != nullptr);
 
 	return io_thread;
 }
@@ -85,7 +84,7 @@ void on_accept(
 
 	std::cout << "wait connection again" << std::endl;
 	socket = boost::make_shared<tcp::socket>(service);
-	_ASSERT(socket != nullptr);
+	BOOST_ASSERT(socket != nullptr);
 
 	acceptor->async_accept(*socket,
 		boost::bind(on_accept,
