@@ -3,7 +3,7 @@
 #include <vector>
 #include <stdexcept>
 
-template <typename T>
+template <typename T, typename CONT = std::vector<T> >
 class Stack
 {
 public:
@@ -14,17 +14,17 @@ public:
 		return elems.empty();
 	}
 private:
-	std::vector<T> elems;
+	CONT elems;
 };
 
-template <typename T>
-void Stack<T>::push(T const& elem)
+template <typename T, typename CONT>
+void Stack<T, CONT>::push(T const& elem)
 {
 	elems.push_back(elem);
 }
 
-template <typename T>
-T Stack<T>::pop()
+template <typename T, typename CONT>
+T Stack<T, CONT>::pop()
 {
 	if (elems.empty())
 	{
@@ -35,8 +35,8 @@ T Stack<T>::pop()
 	return elem;
 }
 
-template <typename T>
-T Stack<T>::top() const
+template <typename T, typename CONT>
+T Stack<T, CONT>::top() const
 {
 	if (elems.empty())
 	{
