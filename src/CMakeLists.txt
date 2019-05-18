@@ -12,6 +12,7 @@ ADD_SUBDIRECTORY ("platforms/any/circular_list")
 ADD_SUBDIRECTORY ("platforms/any/random_integer_generator_simple")
 ADD_SUBDIRECTORY ("platforms/any/random_integer_generator_alter")
 ADD_SUBDIRECTORY ("platforms/any/random_integer_generator_closure")
+ADD_SUBDIRECTORY ("platforms/any/generator_via_template")
 ## some compilers are not supported c++17 yet
 #ADD_SUBDIRECTORY ("platforms/win/std_any")
 
