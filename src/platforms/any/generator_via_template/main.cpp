@@ -4,14 +4,14 @@
 #include <functional>
 
 template <class T, class GenFunc>
-struct Gen : private GenFunc
+struct Gen : public GenFunc
 {
 	using value_type = T;
 
 	explicit Gen(GenFunc func)
 		: GenFunc(std::move(func))
 	{
-	} 
+	}
 
 	T generate()
 	{
@@ -24,22 +24,29 @@ struct Integer
 	explicit Integer(int i) :
 		v(i) {}
 
-	friend std::ostream& operator<<(std::ostream& os, const Integer& i);
-	Integer operator-(Integer i) const {
-		Integer r = *this;
-		r.v -= i.v;
-		return r;
+    friend Integer operator+(Integer const& i, int const& p) {
+        return Integer(i.v + p);
+    }
+    friend Integer operator+(Integer const& i, Integer const& p) {
+        return Integer(i.v + p.v);
+    }
+
+    friend Integer operator-(Integer const& p, Integer const& i) {
+        return Integer(i.v - p.v);
+    }
+    Integer operator-(const Integer& p) {
+        return Integer(v - p.v);
+    }
+    friend Integer operator%(int const& p, Integer const& i) {
+        return Integer(p % i.v);
+    }
+    friend std::ostream& operator<<(std::ostream& os, const Integer& i) {
+        os<<i.v;
+	    return os;
 	}
 
 	int v;
 };
-
-std::ostream& operator<<(std::ostream& os, const Integer& i)
-{
-	os<<i.v;
-
-	return os;
-}
 
 template <class GenFunc>
 auto make_gen_from(GenFunc&& func)
@@ -64,7 +71,7 @@ int main(void)
 	Integer hi(25);
 
 	auto ranger = make_range_gen(hi, lo);
-    std::cout<<"random value : "<<ranger()<<std::endl;
+    std::cout<<"random value : "<<ranger()<<". should between "<<lo<<"to"<<hi<<std::endl;
 
     return EXIT_SUCCESS;
 }

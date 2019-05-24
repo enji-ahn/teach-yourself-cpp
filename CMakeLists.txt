@@ -1,8 +1,8 @@
-cmake_minimum_required(VERSION 3.7)
-project("Teach Yourself C & CPP")
+CMAKE_MINIMUM_REQUIRED(VERSION 3.7)
+PROJECT("Teach Yourself C & CPP")
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin")
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin")
 
 #include sub-projects
-add_subdirectory("src")
+ADD_SUBDIRECTORY("src")
 
