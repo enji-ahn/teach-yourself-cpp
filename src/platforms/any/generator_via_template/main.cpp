@@ -3,68 +3,84 @@
 #include <ctime>
 #include <functional>
 
-template <class T, class GenFunc>
-struct Gen : public GenFunc
+template <class T, class GenFunc> struct Gen : public GenFunc
 {
-	using value_type = T;
+  using value_type = T;
 
-	explicit Gen(GenFunc func)
-		: GenFunc(std::move(func))
-	{
-	}
+  explicit Gen (GenFunc func)
+      : GenFunc (std::move (func))
+  {
+  }
 
-	T generate()
-	{
-		return GenFunc::operator()();
-	}
+  T
+  generate ()
+  {
+    return GenFunc::operator() ();
+  }
 };
 
 struct Integer
 {
-	explicit Integer(int i) :
-		v(i) {}
+  explicit Integer (int i)
+      : v (i)
+  {
+  }
 
-    friend Integer operator+(Integer const& i, Integer const& p) {
-        return Integer(i.v + p.v);
-    }
-    friend Integer operator-(Integer const& p, Integer const& i) {
-        return Integer(i.v - p.v);
-    }
-    friend Integer operator%(int const& p, Integer const& i) {
-        return Integer(p % i.v);
-    }
-    friend std::ostream& operator<<(std::ostream& os, const Integer& i) {
-        os<<i.v;
-	    return os;
-	}
+  friend Integer
+  operator+ (Integer const &i, Integer const &p)
+  {
+    return Integer (i.v + p.v);
+  }
 
-	int v;
+  friend Integer
+  operator- (Integer const &p, Integer const &i)
+  {
+    return Integer (i.v - p.v);
+  }
+
+  friend Integer
+  operator% (int const &p, Integer const &i)
+  {
+    return Integer (p % i.v);
+  }
+
+  friend std::ostream &
+  operator<< (std::ostream &os, const Integer &i)
+  {
+    os << i.v;
+    return os;
+  }
+
+  int v;
 };
 
 template <class GenFunc>
-auto make_gen_from(GenFunc&& func)
+auto
+make_gen_from (GenFunc &&func)
 {
-	return Gen<decltype(func()), GenFunc>(std::forward<GenFunc>(func));
+  return Gen<decltype (func ()), GenFunc> (std::forward<GenFunc> (func));
 }
 
 template <class Integer>
-auto make_range_gen(Integer lo, Integer hi)
+auto
+make_range_gen (Integer lo, Integer hi)
 {
-	return make_gen_from([lo, hi]() {
-						 return static_cast<Integer>(lo + rand() % (hi - lo));
-						 });
+  return make_gen_from ([lo, hi]() { return static_cast<Integer> (lo + rand () % (hi - lo)); });
 }
 
-int main(void)
+int
+main (void)
 {
-	std::size_t seed = time(nullptr);
-	srandom(seed);
+  std::size_t seed = time (nullptr);
 
-	Integer lo(20);
-	Integer hi(25);
+  srandom (seed);
 
-	auto ranger = make_range_gen(hi, lo);
-    std::cout<<"random value : "<<ranger()<<". should between "<<lo<<"to"<<hi<<std::endl;
+  Integer lo (20);
+  Integer hi (25);
 
-    return EXIT_SUCCESS;
+  auto ranger = make_range_gen (hi, lo);
+  std::cout << "random value : " << ranger () << ". should between " << lo << "to" << hi
+            << std::endl;
+
+  return EXIT_SUCCESS;
 }
