@@ -24,18 +24,11 @@ struct Integer
 	explicit Integer(int i) :
 		v(i) {}
 
-    friend Integer operator+(Integer const& i, int const& p) {
-        return Integer(i.v + p);
-    }
     friend Integer operator+(Integer const& i, Integer const& p) {
         return Integer(i.v + p.v);
     }
-
     friend Integer operator-(Integer const& p, Integer const& i) {
         return Integer(i.v - p.v);
-    }
-    Integer operator-(const Integer& p) {
-        return Integer(v - p.v);
     }
     friend Integer operator%(int const& p, Integer const& i) {
         return Integer(p % i.v);
