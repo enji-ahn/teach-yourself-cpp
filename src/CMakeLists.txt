@@ -14,6 +14,9 @@ ADD_SUBDIRECTORY ("platforms/any/random_integer_generator_alter")
 ADD_SUBDIRECTORY ("platforms/any/random_integer_generator_closure")
 ADD_SUBDIRECTORY ("platforms/any/generator_via_template")
 ADD_SUBDIRECTORY ("platforms/any/operator_override")
+
+ADD_SUBDIRECTORY ("platforms/any/asio_udp_receiver_sample1")
+ADD_SUBDIRECTORY ("platforms/any/asio_udp_sender_sample1")
 ## some compilers are not supported c++17 yet
 #ADD_SUBDIRECTORY ("platforms/win/std_any")
 
