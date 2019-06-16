@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <thread>
 #include <cstdint>
 #include <cassert>
 #include <boost/make_shared.hpp>
