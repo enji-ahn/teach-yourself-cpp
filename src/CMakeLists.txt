@@ -18,6 +18,7 @@ ADD_SUBDIRECTORY ("platforms/any/operator_override")
 ADD_SUBDIRECTORY ("platforms/any/asio_udp_receiver_sample1")
 ADD_SUBDIRECTORY ("platforms/any/asio_udp_sender_sample1")
 
+ADD_SUBDIRECTORY ("platforms/any/game_logic")
 ADD_SUBDIRECTORY ("platforms/any/aiming_bullet")
 
 ## some compilers are not supported c++17 yet
