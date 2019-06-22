@@ -63,8 +63,8 @@ void init_aiming_bullet(float mx, /// target position (x)
 
 void move_aiming_bullet(float& x,
 						float& y,
-						float vx,
-						float vy)
+						float const& vx,
+						float const& vy)
 {
 	x += vx;
 	y += vy;
@@ -83,9 +83,19 @@ int main(void)
 					   bullet.p.x, bullet.p.y,
 					   bullet.v.x, bullet.v.y);
 
-	std::cout<<"bullet position x : "<<bullet.p.x<<", y : "<<bullet.p.y<<std::endl;
-	std::cout<<"bullet velocity x : "<<bullet.v.x<<", y : "<<bullet.v.y<<std::endl;
+	std::cout<<"initial bullet position x : "<<bullet.p.x<<", y : "<<bullet.p.y<<std::endl;
+	std::cout<<"initial bullet velocity x : "<<bullet.v.x<<", y : "<<bullet.v.y<<std::endl;
 
+
+	for (auto i = 0; i < 100; ++i)
+	{
+		move_aiming_bullet(bullet.p.x, bullet.p.y, bullet.v.x, bullet.v.y);
+
+		std::cout<<"bullet position x : "<<bullet.p.x<<", y : "<<bullet.p.y<<std::endl;
+#if 0
+		std::cout<<"bullet velocity x : "<<bullet.v.x<<", y : "<<bullet.v.y<<std::endl;
+#endif
+	}
 
     return EXIT_SUCCESS;
 }
