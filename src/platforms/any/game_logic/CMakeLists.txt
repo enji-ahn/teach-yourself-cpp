@@ -23,6 +23,11 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall")
 
 ADD_EXECUTABLE       (${OUTPUT_NAME} ${SOURCES})
 TARGET_LINK_LIBRARIES(${OUTPUT_NAME} ${EXTRA_LIBS})
+
+# copy resource to output(binary) directory
+add_custom_command(TARGET ${OUTPUT_NAME}
+	POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/Media ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Media
+	COMMENT                               "copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/Media ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Media")
 #
 #################################################################### project ##
 

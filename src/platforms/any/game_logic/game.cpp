@@ -1,6 +1,10 @@
 #include "game.hpp"
 #include "StringHelpers.hpp"
 
+#include <unistd.h>
+#include <cstring>
+#include <algorithm>
+
 
 const float Game::PlayerSpeed = 100.f;
 const sf::Time Game::TimePerFrame = sf::seconds(1.f/60.f);
@@ -18,7 +22,9 @@ Game::Game()
 , mIsMovingRight(false)
 , mIsMovingLeft(false)
 {
-	if (!mTexture.loadFromFile("Media/Textures/Eagle.png"))
+	mModulePath = getModulePath();
+
+	if (!mTexture.loadFromFile(mModulePath+"/Media/Textures/Eagle.png"))
 	{
 		// Handle loading error
 	}
@@ -26,10 +32,26 @@ Game::Game()
 	mPlayer.setTexture(mTexture);
 	mPlayer.setPosition(100.f, 100.f);
 
-	mFont.loadFromFile("Media/Sansation.ttf");
+	mFont.loadFromFile(mModulePath+"/Media/Sansation.ttf");
 	mStatisticsText.setFont(mFont);
 	mStatisticsText.setPosition(5.f, 5.f);
 	mStatisticsText.setCharacterSize(10);
+}
+
+std::string Game::getModulePath()
+{
+	char path[1024];
+	ssize_t len = 1024;
+
+	int bytes = std::min(readlink("/proc/self/exe", path, len), len - 1);
+	if (bytes >= 0)
+	{
+		path[bytes] = '\0';
+		std::string base(path);
+		return base.substr(0, base.find_last_of("/"));
+	}
+
+	return nullptr;
 }
 
 void Game::run()

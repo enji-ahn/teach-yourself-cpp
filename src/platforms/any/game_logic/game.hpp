@@ -9,16 +9,18 @@ class Game : private sf::NonCopyable
 	public:
 								Game();
 		void					run();
-		
+
 
 	private:
 		void					processEvents();
 		void					update(sf::Time elapsedTime);
 		void					render();
 
-		void					updateStatistics(sf::Time elapsedTime);	
+		void					updateStatistics(sf::Time elapsedTime);
 		void					handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
-		
+
+		std::string 			getModulePath();
+
 
 	private:
 		static const float		PlayerSpeed;
@@ -36,6 +38,8 @@ class Game : private sf::NonCopyable
 		bool					mIsMovingDown;
 		bool					mIsMovingRight;
 		bool					mIsMovingLeft;
+
+		std::string 			mModulePath;
 };
 
 #endif // BOOK_GAME_HPP
