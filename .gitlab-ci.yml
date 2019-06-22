@@ -1,7 +1,6 @@
 image:  reaverproject/gcc-boost:7_4_0-1.69.0
 
 before_script:
-    - apt-get update -qq && apt-get install -y -qq libboost-all-dev
     - cd build
     - cmake ..
 
