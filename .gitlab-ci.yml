@@ -1,4 +1,4 @@
-image: rikorose/gcc-cmake:gcc-8
+image:  reaverproject/gcc-boost:latest
 
 before_script:
     - apt-get update -qq && apt-get install -y -qq libboost-all-dev
