@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "world.hpp"
+
 
 class Game : private sf::NonCopyable
 {
@@ -23,21 +25,22 @@ class Game : private sf::NonCopyable
 
 
 	private:
-		static const float		PlayerSpeed;
+//		static const float		PlayerSpeed;
 		static const sf::Time	TimePerFrame;
 
 		sf::RenderWindow		mWindow;
-		sf::Texture				mTexture;
-		sf::Sprite				mPlayer;
+		World 					mWorld;
+//		sf::Texture				mTexture;
+//		sf::Sprite				mPlayer;
 		sf::Font				mFont;
 		sf::Text				mStatisticsText;
 		sf::Time				mStatisticsUpdateTime;
 
 		std::size_t				mStatisticsNumFrames;
-		bool					mIsMovingUp;
-		bool					mIsMovingDown;
-		bool					mIsMovingRight;
-		bool					mIsMovingLeft;
+//		bool					mIsMovingUp;
+//		bool					mIsMovingDown;
+//		bool					mIsMovingRight;
+//		bool					mIsMovingLeft;
 
 		std::string 			mModulePath;
 };

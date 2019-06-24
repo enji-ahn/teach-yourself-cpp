@@ -6,31 +6,32 @@
 #include <algorithm>
 
 
-const float Game::PlayerSpeed = 100.f;
+//const float Game::PlayerSpeed = 100.f;
 const sf::Time Game::TimePerFrame = sf::seconds(1.f/60.f);
 
 Game::Game()
 : mWindow(sf::VideoMode(640, 480), "SFML Application", sf::Style::Close)
-, mTexture()
-, mPlayer()
+//, mTexture()
+//, mPlayer()
 , mFont()
 , mStatisticsText()
 , mStatisticsUpdateTime()
 , mStatisticsNumFrames(0)
-, mIsMovingUp(false)
-, mIsMovingDown(false)
-, mIsMovingRight(false)
-, mIsMovingLeft(false)
+//, mIsMovingUp(false)
+//, mIsMovingDown(false)
+//, mIsMovingRight(false)
+//, mIsMovingLeft(false)
+, mWorld(mWindow)
 {
 	mModulePath = getModulePath();
 
-	if (!mTexture.loadFromFile(mModulePath+"/Media/Textures/Eagle.png"))
-	{
-		// Handle loading error
-	}
-
-	mPlayer.setTexture(mTexture);
-	mPlayer.setPosition(100.f, 100.f);
+//	if (!mTexture.loadFromFile(mModulePath+"/Media/Textures/Eagle.png"))
+//	{
+//		// Handle loading error
+//	}
+//
+//	mPlayer.setTexture(mTexture);
+//	mPlayer.setPosition(100.f, 100.f);
 
 	mFont.loadFromFile(mModulePath+"/Media/Sansation.ttf");
 	mStatisticsText.setFont(mFont);
@@ -99,23 +100,23 @@ void Game::processEvents()
 
 void Game::update(sf::Time elapsedTime)
 {
-	sf::Vector2f movement(0.f, 0.f);
-	if (mIsMovingUp)
-		movement.y -= PlayerSpeed;
-	if (mIsMovingDown)
-		movement.y += PlayerSpeed;
-	if (mIsMovingLeft)
-		movement.x -= PlayerSpeed;
-	if (mIsMovingRight)
-		movement.x += PlayerSpeed;
-
-	mPlayer.move(movement * elapsedTime.asSeconds());
+//	sf::Vector2f movement(0.f, 0.f);
+//	if (mIsMovingUp)
+//		movement.y -= PlayerSpeed;
+//	if (mIsMovingDown)
+//		movement.y += PlayerSpeed;
+//	if (mIsMovingLeft)
+//		movement.x -= PlayerSpeed;
+//	if (mIsMovingRight)
+//		movement.x += PlayerSpeed;
+//
+//	mPlayer.move(movement * elapsedTime.asSeconds());
 }
 
 void Game::render()
 {
 	mWindow.clear();
-	mWindow.draw(mPlayer);
+//	mWindow.draw(mPlayer);
 	mWindow.draw(mStatisticsText);
 	mWindow.display();
 }
@@ -138,12 +139,12 @@ void Game::updateStatistics(sf::Time elapsedTime)
 
 void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 {
-	if (key == sf::Keyboard::W)
-		mIsMovingUp = isPressed;
-	else if (key == sf::Keyboard::S)
-		mIsMovingDown = isPressed;
-	else if (key == sf::Keyboard::A)
-		mIsMovingLeft = isPressed;
-	else if (key == sf::Keyboard::D)
-		mIsMovingRight = isPressed;
+//	if (key == sf::Keyboard::W)
+//		mIsMovingUp = isPressed;
+//	else if (key == sf::Keyboard::S)
+//		mIsMovingDown = isPressed;
+//	else if (key == sf::Keyboard::A)
+//		mIsMovingLeft = isPressed;
+//	else if (key == sf::Keyboard::D)
+//		mIsMovingRight = isPressed;
 }
