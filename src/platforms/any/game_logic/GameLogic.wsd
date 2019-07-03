@@ -1,0 +1,6 @@
+@startuml
+SceneNode <|-- Entity
+sf::Transformable <|-- SceneNode
+sf::Drawable <|-- SceneNode
+sf::NonCopyable <|-- SceneNode
+@enduml
