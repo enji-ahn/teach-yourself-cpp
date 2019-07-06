@@ -2,10 +2,11 @@
 
 struct NoImplicitCopy {
 	NoImplicitCopy() = default;
-	explicit NoImplicitCopy(const NoImplicitCopy& ) = default;
+	explicit NoImplicitCopy(NoImplicitCopy&) = default;
 };
 
-NoImplicitCopy foo() {
+NoImplicitCopy foo()
+{
 	NoImplicitCopy n;
 	return n;
 }
@@ -19,7 +20,6 @@ int main(void)
 	NoImplicitCopy x(n);
 
 	n = foo();
-
 	bar(n);
 
     return EXIT_SUCCESS;
