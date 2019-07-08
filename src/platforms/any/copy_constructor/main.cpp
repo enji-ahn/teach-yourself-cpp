@@ -2,7 +2,7 @@
 
 struct NoImplicitCopy {
 	NoImplicitCopy() = default;
-	explicit NoImplicitCopy(NoImplicitCopy&) = default;
+	explicit NoImplicitCopy(const NoImplicitCopy&) = default;
 };
 
 NoImplicitCopy foo()
