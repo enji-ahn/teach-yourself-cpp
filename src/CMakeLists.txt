@@ -17,8 +17,8 @@ ADD_SUBDIRECTORY ("platforms/any/random_integer_generator_alter")
 # ADD_SUBDIRECTORY ("platforms/any/generator_via_template")
 # ADD_SUBDIRECTORY ("platforms/any/operator_override")
 
-# ADD_SUBDIRECTORY ("platforms/any/asio_udp_receiver_sample1")
-# ADD_SUBDIRECTORY ("platforms/any/asio_udp_sender_sample1")
+ADD_SUBDIRECTORY ("platforms/any/asio_udp_receiver_sample1")
+ADD_SUBDIRECTORY ("platforms/any/asio_udp_sender_sample1")
 
 #ADD_SUBDIRECTORY ("platforms/any/game_logic")
 # ADD_SUBDIRECTORY ("platforms/any/aiming_bullet")

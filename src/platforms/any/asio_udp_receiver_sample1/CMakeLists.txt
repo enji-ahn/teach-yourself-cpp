@@ -11,6 +11,10 @@ SET(SOURCES
   "main.cpp"
   )
 
+IF (WIN32)
+  ADD_DEFINITIONS(-D_WIN32_WINNT=0x0601) # Windows 7
+ENDIF (WIN32)
+
 find_package(Threads REQUIRED)
 set(EXTRA_LIBS ${CMAKE_THREAD_LIBS_INIT})
 

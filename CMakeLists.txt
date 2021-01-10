@@ -3,6 +3,9 @@ PROJECT("Teach Yourself C & CPP")
 
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin")
 
+INCLUDE_DIRECTORIES(
+    ${CMAKE_SOURCE_DIR}/lib/platforms/any
+    ${CMAKE_SOURCE_DIR}/lib/platforms/win)
 #include sub-projects
 ADD_SUBDIRECTORY("src")
 
