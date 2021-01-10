@@ -5,6 +5,7 @@
 # Include sub-projects.
 ADD_SUBDIRECTORY ("platforms/win/BitOrder")
 add_subdirectory("platforms/any/insertion_sort")
+add_subdirectory("platforms/any/shell_sort")
 ADD_SUBDIRECTORY ("platforms/win/Integrating Mocking with C++ Default Parameters")
 # ADD_SUBDIRECTORY ("platforms/win/asio_check_when_the_connection_is_made")
 # ADD_SUBDIRECTORY ("platforms/win/asio_listen_stopped_by_io_service")
@@ -21,6 +22,8 @@ ADD_SUBDIRECTORY ("platforms/any/random_integer_generator_alter")
 
 #ADD_SUBDIRECTORY ("platforms/any/game_logic")
 # ADD_SUBDIRECTORY ("platforms/any/aiming_bullet")
+
+ADD_SUBDIRECTORY ("platforms/any/generic_partition_and_stable_partition_algorithm")
 
 ADD_SUBDIRECTORY ("platforms/any/copy_constructor")
 ## some compilers are not supported c++17 yet
