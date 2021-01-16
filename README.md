@@ -7,7 +7,6 @@ C 언어 학습을 위한 프로젝트
 ## Project Structure
 디렉토리 구조를 다음과 같이 잡아서 진행합니다.
 
-```
 * /project             //Top level folder
   * /bin               //Binaries ready for deployment
     * /amd64           //AMD64 platform
@@ -45,4 +44,4 @@ C 언어 학습을 위한 프로젝트
            * sample_aaa.vcxproj
          * /sample_bbb
   * /test              //Automated test scripts
-```
+
