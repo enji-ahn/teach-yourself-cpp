@@ -3,6 +3,8 @@
 #
 
 # Include sub-projects.
+ADD_SUBDIRECTORY ("platforms/any/helloworld")
+
 ADD_SUBDIRECTORY ("platforms/win/BitOrder")
 add_subdirectory("platforms/any/insertion_sort")
 add_subdirectory("platforms/any/shell_sort")
