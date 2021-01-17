@@ -4,9 +4,9 @@
 
 # Include sub-projects.
 ADD_SUBDIRECTORY ("platforms/win/BitOrder")
-add_subdirectory("platforms/any/insertion_sort")
-add_subdirectory("platforms/any/shell_sort")
 ADD_SUBDIRECTORY ("platforms/win/Integrating Mocking with C++ Default Parameters")
+ADD_SUBDIRECTORY ("platforms/win/win32_handmade")
+
 # ADD_SUBDIRECTORY ("platforms/win/asio_check_when_the_connection_is_made")
 # ADD_SUBDIRECTORY ("platforms/win/asio_listen_stopped_by_io_service")
 ADD_SUBDIRECTORY ("platforms/any/class_templated_stack")
@@ -19,6 +19,9 @@ ADD_SUBDIRECTORY ("platforms/any/random_integer_generator_alter")
 
 ADD_SUBDIRECTORY ("platforms/any/asio_udp_receiver_sample1")
 ADD_SUBDIRECTORY ("platforms/any/asio_udp_sender_sample1")
+
+ADD_SUBDIRECTORY ("platforms/any/insertion_sort")
+ADD_SUBDIRECTORY ("platforms/any/shell_sort")
 
 #ADD_SUBDIRECTORY ("platforms/any/game_logic")
 # ADD_SUBDIRECTORY ("platforms/any/aiming_bullet")
