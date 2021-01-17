@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include <windows.h>
 #include <tchar.h>
 #include <cassert>
@@ -276,7 +276,7 @@ LRESULT CALLBACK Win32MainWindowCallback(_In_ HWND hwnd,
     case WM_KEYUP:
     {
         auto WasDown = (lParam & (1 << 30)) != 0; // 30bit of lParam has previous key state
-        auto IsDown = (lParam & (1 << 31)) == 0;  // 31bit of lParam has current key state (1 mean key up)
+        auto IsDown = (lParam & ((unsigned long)1 << 31)) == 0;  // 31bit of lParam has current key state (1 mean key up)
         auto VKCode = (uint32_t)wParam;
 
         if (WasDown != IsDown)
@@ -425,10 +425,11 @@ Win32FillSoundBuffer(win32_sound_output *SoundOutput,
     }
 }
 
-int CALLBACK WinMain(HINSTANCE hInstance,
-                     HINSTANCE hPrevInstance,
-                     LPSTR lpCmdLine,
-                     int nShowCmd)
+int CALLBACK WinMain(
+    _In_ HINSTANCE hInstance,
+    _In_opt_ HINSTANCE hPrevInstance,
+    _In_ LPSTR lpCmdLine,
+    _In_ int nShowCmd)
 {
     Win32LoadXInput();
     Win32ResizeDIBSection(&GlobalBackBuffer,
@@ -592,7 +593,7 @@ int CALLBACK WinMain(HINSTANCE hInstance,
         auto FPS = PerfCountFrequency / CounterElapsed;
 
         TCHAR buffer[1024];
-        _stprintf_s(buffer, 1024, _T("Milliseconds/frame : %dns / %dFPS\n"), MSPerFrame, FPS);
+        _stprintf_s(buffer, 1024, _T("Milliseconds/frame : %lldns / %lldFPS\n"), MSPerFrame, FPS);
         OutputDebugString(_T(""));
 
         LastCounter = EndCounter;
