@@ -60,7 +60,7 @@ int main()
         sale.scan("1");
     }
 
-    // 테스트를 위한 Fake Display 객체로 교체하여 출력값이 정상적으로 나오는지 테스트
+    // 바코드 스캔 동작 테스트를 위해, ArtR56Display 를 Fake Display 객체로 교체하여 출력값이 정상적으로 나오는지 테스트
     {
         Display *display = new FakeDisplay();
         Sale sale(*display);
