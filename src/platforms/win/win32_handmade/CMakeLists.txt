@@ -10,9 +10,10 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 if (WIN32)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /FC /Zi /W4")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /FC /Zi /Qspectre /W4")
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
     add_definitions(-D_SCL_SECURE_NO_WARNINGS)
+    add_definitions(-D__STDC_WANT_SECURE_LIB__)
 	add_definitions(-D_WIN32_WINNT=0x0A00) # Windows 10
 endif (WIN32)
 
