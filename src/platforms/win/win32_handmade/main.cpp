@@ -427,9 +427,9 @@ Win32FillSoundBuffer(win32_sound_output *SoundOutput,
 
 int CALLBACK WinMain(
     _In_ HINSTANCE hInstance,
-    _In_opt_ HINSTANCE hPrevInstance,
-    _In_ LPSTR lpCmdLine,
-    _In_ int nShowCmd)
+    _In_opt_ HINSTANCE /*hPrevInstance*/,
+    _In_ LPSTR /*lpCmdLine*/,
+    _In_ int /*nShowCmd*/)
 {
     Win32LoadXInput();
     Win32ResizeDIBSection(&GlobalBackBuffer,
