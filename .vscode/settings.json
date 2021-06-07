@@ -1,5 +1,7 @@
 {
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "C_Cpp.default.intelliSenseMode": "windows-msvc-x64",
+    "C_Cpp.clang_format_fallbackStyle": "{ ColumnLimit: 0 }",
     "files.associations": {
         "vector": "cpp",
         "xutility": "cpp",
@@ -80,6 +82,13 @@
         "xlocmes": "cpp",
         "xlocmon": "cpp",
         "xloctime": "cpp",
-        "xtree": "cpp"
+        "xtree": "cpp",
+        "*.ipp": "cpp",
+        "bit": "cpp",
+        "charconv": "cpp",
+        "format": "cpp",
+        "forward_list": "cpp",
+        "source_location": "cpp",
+        "stop_token": "cpp"
     }
 }

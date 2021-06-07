@@ -9,7 +9,7 @@ class stopwatch
 public:
     stopwatch();
     ~stopwatch();
-    void elapsed();
+    auto elapsed(bool log = true) -> double;
     void reset();
 
 private:
@@ -25,11 +25,13 @@ inline stopwatch::stopwatch()
     _start = std::chrono::high_resolution_clock::now();
 }
 
-inline void stopwatch::elapsed()
-{
-    auto stop = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> elapsed = stop - _start;
+inline auto stopwatch::elapsed(bool log) -> double {
+  auto stop = std::chrono::high_resolution_clock::now();
+  std::chrono::duration<double> elapsed = stop - _start;
+  if (log) {
     std::cout << "Elapsed time: " << elapsed.count() << " s\n";
+  }
+  return elapsed.count();
 }
 
 inline void stopwatch::reset()

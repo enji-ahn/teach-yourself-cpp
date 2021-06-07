@@ -6,9 +6,6 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/ide.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/platform.cmake)
 include_directories(${CMAKE_SOURCE_DIR}/src/headers)
 
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 if (WIN32)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /FC /Zi /Qspectre /W4")
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
