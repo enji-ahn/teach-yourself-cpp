@@ -7,15 +7,17 @@
 #include <cstring>
 #include <fstream>
 #include <functional>
+#include <future>
 #include <iostream>
 #include <stopwatch.hpp>
 #include <string>
 #include <thread>
 #include <tuple>
+#include <vector>
 
 stopwatch stop_watch;
 
-auto save_image(const std::string URL, const std::string file_name, bool log = false) -> void {
+auto get_image_buffer(const std::string URL, std::promise<std::vector<std::string>> &ret, bool log = false) -> void {
   std::string site;
   std::string page;
   std::tie(site, page) = [](std::string url) -> std::pair<std::string, std::string> {
@@ -80,6 +82,8 @@ auto save_image(const std::string URL, const std::string file_name, bool log = f
   request_stream << "Accept-Encoding: gzip, deflate\r\n";
   request_stream << "Accept-Language: ko,en-US;q=0.9,en;q=0.8,ca;q=0.7,da;q=0.6\r\n\r\n";
 
+  decltype(ret.get_future().get()) v;
+
   // Send the request.
   asio::write(socket, request);
 
@@ -89,53 +93,58 @@ auto save_image(const std::string URL, const std::string file_name, bool log = f
   asio::streambuf response;
   asio::read_until(socket, response, "\r\n");
 
-  // Check that response is OK.
-  std::istream response_stream(&response);
-  std::string http_version;
-  response_stream >> http_version;
-  unsigned int status_code;
-  response_stream >> status_code;
-  std::string status_message;
-  std::getline(response_stream, status_message);
-  if (!response_stream || http_version.substr(0, 5) != "HTTP/") {
-    std::cout << "ERRORED: Invalid response\n";
-    return;
-  }
-  if (status_code != 200) {
-    std::cout << "ERRORED: Response returned with status code " << status_code << "\n";
-    return;
-  }
-
-  // Read the response headers, which are terminated by a blank line.
-  asio::read_until(socket, response, "\r\n\r\n");
-
-  // Process the response headers.
-  std::string header;
-  while (std::getline(response_stream, header) && header != "\r") {
-    if (log) {
-      std::cout << header << "\n";
+  do {
+    // Check that response is OK.
+    std::istream response_stream(&response);
+    std::string http_version;
+    response_stream >> http_version;
+    unsigned int status_code;
+    response_stream >> status_code;
+    std::string status_message;
+    std::getline(response_stream, status_message);
+    if (!response_stream || http_version.substr(0, 5) != "HTTP/") {
+      std::cout << "ERRORED: Invalid response\n";
+      break;
     }
-  }
-  std::cout << "\n";
+    if (status_code != 200) {
+      std::cout << "ERRORED: Response returned with status code " << status_code << "\n";
+      break;
+    }
 
-  std::ofstream file;
-  file.open(file_name, std::ios::out | std::ios::binary);
+    // Read the response headers, which are terminated by a blank line.
+    asio::read_until(socket, response, "\r\n\r\n");
 
-  // Read until EOF, writing data to output as we go.
-  asio::error_code error;
-  while (asio::read(socket, response, asio::transfer_at_least(1), error)) {
-    file << &response;
-  }
-  file.close();
+    // Process the response headers.
+    std::string header;
+    while (std::getline(response_stream, header) && header != "\r") {
+      if (log) {
+        std::cout << header << "\n";
+      }
+    }
+    std::cout << "\n";
 
-  if (error != asio::error::eof) {
-    std::cout << "ERRORED: " << error.message() << std::endl;
-  }
+    // Read until EOF, writing data to output as we go.
+    asio::error_code error;
+    while (asio::read(socket, response, asio::transfer_at_least(1), error)) {
+      v.push_back(std::string(asio::buffer_cast<const char *>(response.data()), asio::buffer_size(response.data())));
+      response.consume(asio::buffer_size(response.data()));
+    }
+
+    if (error != asio::error::eof) {
+      std::cout << "ERRORED: " << error.message() << std::endl;
+    }
+  } while (false);
+
+  ret.set_value(v);
+
+  using namespace std::chrono_literals;
+  std::this_thread::sleep_for(1000ms);
 }
 
-auto async_fn(const std::string URL) -> std::thread {
-  std::thread t([URL]() {
-    save_image(URL, "image_t.png");
+auto async_fn(const std::string URL, std::promise<std::vector<std::string>> &promise) -> std::thread {
+
+  std::thread t([URL, &promise]() {
+    get_image_buffer(URL, promise);
     std::cout << "async end : " << stop_watch.elapsed(false) << std::endl;
   });
   return t;
@@ -143,9 +152,23 @@ auto async_fn(const std::string URL) -> std::thread {
 
 int main(int argc, char *argv[]) {
   stop_watch.reset();
-  auto t = async_fn("http://www.korea.edu/dext5editordata/2020/12/20201210_093034568_30817.png");
+  std::promise<std::vector<std::string>> promise;
+  auto future = promise.get_future();
+  auto t = async_fn("http://www.korea.edu/dext5editordata/2020/12/20201210_093034568_30817.png", promise);
   std::cout << "cur time : " << stop_watch.elapsed(false) << std::endl;
+
+  future.wait();
+  auto vec = future.get();
+  std::cout << "end promise time : " << stop_watch.elapsed(false) << std::endl;
+
+  std::ofstream file;
+  file.open("image_f_p.png", std::ios::out | std::ios::binary);
+  for (std::string &v : vec) {
+    file.write(v.c_str(), v.length());
+  }
+  file.close();
+
   t.join();
-  std::cout << "end time : " << stop_watch.elapsed(false) << std::endl;
+  std::cout << "end thread time : " << stop_watch.elapsed(false) << std::endl;
   return 0;
 }
