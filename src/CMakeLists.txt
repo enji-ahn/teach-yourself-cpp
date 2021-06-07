@@ -28,6 +28,7 @@ ADD_SUBDIRECTORY ("platforms/any/insertion_sort")
 ADD_SUBDIRECTORY ("platforms/any/shell_sort")
 ADD_SUBDIRECTORY ("platforms/any/async_via_thread")
 ADD_SUBDIRECTORY ("platforms/any/async_via_promise")
+ADD_SUBDIRECTORY ("platforms/any/async_via_await")
 
 #ADD_SUBDIRECTORY ("platforms/any/game_logic")
 # ADD_SUBDIRECTORY ("platforms/any/aiming_bullet")
