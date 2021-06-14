@@ -1,3 +1,9 @@
+#ifndef __LEGACY_HPP__
+#define __LEGACY_HPP__
+
+#include "stdafx.h"
+#include <map>
+
 class LegacyInputHandler {
 public:
 	void handleInput();
@@ -13,3 +19,5 @@ private:
 		return ::isPressed(m, b);
 	}
 };
+
+#endif
