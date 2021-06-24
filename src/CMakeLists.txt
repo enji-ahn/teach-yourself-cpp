@@ -32,6 +32,7 @@ ADD_SUBDIRECTORY ("platforms/any/async_via_await")
 
 add_subdirectory("platforms/any/command_pattern")
 add_subdirectory("platforms/any/observer_pattern")
+add_subdirectory("platforms/any/state_pattern")
 
 #ADD_SUBDIRECTORY ("platforms/any/game_logic")
 # ADD_SUBDIRECTORY ("platforms/any/aiming_bullet")
