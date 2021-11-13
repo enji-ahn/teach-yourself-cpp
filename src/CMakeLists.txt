@@ -41,6 +41,7 @@ add_subdirectory("platforms/any/gameloop_pattern")
 # ADD_SUBDIRECTORY ("platforms/any/aiming_bullet")
 
 add_subdirectory("platforms/any/std_map")
+ADD_SUBDIRECTORY("platforms/any/nested_exception_handling")
 
 ADD_SUBDIRECTORY ("platforms/any/generic_partition_and_stable_partition_algorithm")
 ADD_SUBDIRECTORY ("platforms/any/generic_transform_algorithm")
