@@ -4,7 +4,8 @@
 
 # Include sub-projects.
 ADD_SUBDIRECTORY ("platforms/any/helloworld")
-
+ADD_SUBDIRECTORY ("platforms/any/여러-번역-단위에-걸친-룩업")
+ADD_SUBDIRECTORY ("platforms/any/예외로부터-보호")
 ADD_SUBDIRECTORY ("platforms/win/BitOrder")
 ADD_SUBDIRECTORY ("platforms/win/Integrating Mocking with C++ Default Parameters")
 ADD_SUBDIRECTORY ("platforms/win/win32_handmade")
