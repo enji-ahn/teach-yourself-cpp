@@ -8,6 +8,7 @@ ADD_SUBDIRECTORY ("platforms/any/helloworld")
 ADD_SUBDIRECTORY ("platforms/win/BitOrder")
 ADD_SUBDIRECTORY ("platforms/win/Integrating Mocking with C++ Default Parameters")
 ADD_SUBDIRECTORY ("platforms/win/win32_handmade")
+add_subdirectory ("platforms/win/순열")
 
 ADD_SUBDIRECTORY ("platforms/unix/coroutine_in_c")
 # ADD_SUBDIRECTORY ("platforms/win/asio_check_when_the_connection_is_made")
