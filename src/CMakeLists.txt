@@ -10,6 +10,13 @@ ADD_SUBDIRECTORY ("platforms/win/Integrating Mocking with C++ Default Parameters
 ADD_SUBDIRECTORY ("platforms/win/win32_handmade")
 add_subdirectory ("platforms/win/순열")
 add_subdirectory ("platforms/win/h_index")
+add_subdirectory ("platforms/win/hate_same_number")
+add_subdirectory ("platforms/win/function_dev")
+add_subdirectory ("platforms/win/correct_bracket")
+add_subdirectory ("platforms/win/processes")
+add_subdirectory ("platforms/win/truck_on_bridge")
+add_subdirectory ("platforms/win/stock_prices")
+add_subdirectory ("platforms/win/more_spicy")
 
 ADD_SUBDIRECTORY ("platforms/unix/coroutine_in_c")
 # ADD_SUBDIRECTORY ("platforms/win/asio_check_when_the_connection_is_made")
