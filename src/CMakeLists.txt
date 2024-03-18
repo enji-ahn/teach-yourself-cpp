@@ -17,6 +17,8 @@ add_subdirectory ("platforms/win/processes")
 add_subdirectory ("platforms/win/truck_on_bridge")
 add_subdirectory ("platforms/win/stock_prices")
 add_subdirectory ("platforms/win/more_spicy")
+add_subdirectory ("platforms/win/double_prio_queue")
+
 
 ADD_SUBDIRECTORY ("platforms/unix/coroutine_in_c")
 # ADD_SUBDIRECTORY ("platforms/win/asio_check_when_the_connection_is_made")
