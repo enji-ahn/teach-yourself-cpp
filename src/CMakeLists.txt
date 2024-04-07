@@ -9,6 +9,7 @@ ADD_SUBDIRECTORY ("platforms/any/예외로부터-보호")
 ADD_SUBDIRECTORY ("platforms/any/hash-pocketmon")
 ADD_SUBDIRECTORY ("platforms/any/hash-marathoners")
 ADD_SUBDIRECTORY ("platforms/any/hash-phonebook")
+ADD_SUBDIRECTORY ("platforms/any/hash-bestalbum")
 
 if (WIN32)
   ADD_SUBDIRECTORY ("platforms/win/BitOrder")
