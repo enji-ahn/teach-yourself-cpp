@@ -15,6 +15,8 @@ ADD_SUBDIRECTORY ("platforms/any/exhaustive_search-min_rect")
 ADD_SUBDIRECTORY ("platforms/any/exhaustive_search-prime_number")
 add_subdirectory ("platforms/any/exhaustive_search-tired")
 add_subdirectory ("platforms/any/exhaustive_search-vowel_dict")
+add_subdirectory ("platforms/any/dfs_bfs-network")
+add_subdirectory ("platforms/any/dfs_bfs-wordconv")
 
 if (WIN32)
   ADD_SUBDIRECTORY ("platforms/win/BitOrder")
