@@ -19,6 +19,8 @@ add_subdirectory ("platforms/any/dfs_bfs-network")
 add_subdirectory ("platforms/any/dfs_bfs-wordconv")
 add_subdirectory ("platforms/any/dfs_bfs-target_number")
 add_subdirectory ("platforms/any/dfs_bfs-shortest_path")
+add_subdirectory ("platforms/any/dfs_bfs-item_finder")
+
 
 if (WIN32)
   ADD_SUBDIRECTORY ("platforms/win/BitOrder")
