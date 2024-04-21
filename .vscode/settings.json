@@ -95,6 +95,14 @@
         "memory_resource": "cpp",
         "string_view": "cpp",
         "numbers": "cpp",
-        "semaphore": "cpp"
+        "semaphore": "cpp",
+        "bitset": "cpp",
+        "complex": "cpp",
+        "unordered_set": "cpp",
+        "span": "cpp",
+        "stdfloat": "cpp",
+        "typeindex": "cpp",
+        "valarray": "cpp",
+        "variant": "cpp"
     }
 }
