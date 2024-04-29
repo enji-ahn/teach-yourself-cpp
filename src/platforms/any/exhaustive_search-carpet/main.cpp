@@ -12,6 +12,12 @@
 #include <vector>
 
 /**
+ * 문제 : https://school.programmers.co.kr/learn/courses/30/lessons/42842
+ * 풀이 
+ * ----
+ * Leo는 카펫을 사러 갔다가 아래 그림과 같이 중앙에는 노란색으로 칠해져 있고 
+ * ```````테두리 1줄````````은 갈색으로 칠해져 있는 격자 모양 카펫을 봤습니다.
+ * 
  * WIPWIPWIPWIPWIPWIPWIP
  *
  * 24	, 24	, [8, 6] 값일때
@@ -26,7 +32,7 @@
 5x4 = 20
 5x5 25
 
-    6x4 = 24
+	6x4 = 24
 
 7x3 = 21
 7x4 = 28
@@ -41,23 +47,60 @@ using namespace std;
 
 #define SHOW_LOG false
 
-using score = int;
-using name = int;
+vector<int> solution(int brown, int yellow) {
+	auto ok = false;
+	auto y_height = 0;
+	auto b_width = 0;
+	do {
+		y_height++;
+		for (auto j = 1; j <= y_height; ++j) {
+			if (j * y_height == yellow) {
+				auto y_width = (j > y_height) ? j : y_height;
+				auto tmp_height = (j < y_height) ? j : y_height;
 
-std::string join(std::vector<int> results) {
-  auto r = std::string();
-  for (auto &result : results) {
-    r += std::to_string(result);
-    r += ", ";
-  }
-  return r;
+				// 테두리 ````1줄```` 체크
+				auto b_ok = false;
+				b_width = y_width + 2;
+				if (b_width * (tmp_height + 2) - yellow == brown) {
+					b_ok = true;
+				}
+
+				if (b_ok) {
+					ok = true;
+	
+					if (j < y_height) {
+						y_width = y_height;
+						y_height = j;
+					}
+
+					break;
+				}
+			}
+		}
+	} while (!ok);
+
+	return { b_width, y_height + 2 /*top, bottom line*/};
 }
 
-int main(int argc, char const *argv[]) {
-  std::cout << "result -> " << join(solution({1, 2, 3, 4, 5}))
-            << " expected -> " << join({1}) << std::endl;
-  std::cout << "result -> " << join(solution({1, 3, 2, 4, 2}))
-            << " expected -> " << join({1, 2, 3}) << std::endl;
+std::string join(std::vector<int> results) {
+	auto r = std::string();
+	for (auto& result : results) {
+		r += std::to_string(result);
+		r += ", ";
+	}
+	return r;
+}
 
-  return 0;
+int main(int argc, char const* argv[]) {
+
+	std::cout << "result -> " << join(solution(18, 6))
+		<< " expected -> " << join({ 8, 3 }) << std::endl;
+	std::cout << "result -> " << join(solution(10, 2))
+		<< " expected -> " << join({ 4, 3 }) << std::endl;
+	std::cout << "result -> " << join(solution(8, 1))
+		<< " expected -> " << join({ 3, 3 }) << std::endl;
+	std::cout << "result -> " << join(solution(24, 24))
+		<< " expected -> " << join({ 8, 6 }) << std::endl;
+
+	return 0;
 }
