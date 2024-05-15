@@ -38,6 +38,7 @@ number	k	return
 (sequencly remove min numbers from '7752841'. 775284, 775841, 775281, ...)
  * if privious numer is lessthn first, then remove it -> 4'775841'
  * if privious numer is lessthn first, then remove it -> '775841'
+ * 4321 의 경우 처리 못함.
  *
  *
  * 4177252841
@@ -78,75 +79,188 @@ number	k	return
  * 775841
  * 775241
  * 775281
- **/
+ * 모든 경우의 수 (느림)
+ * 
+ * 4177252841 : 4
+ * [4][1][7][7]252841 
+ * [4][1][7]7[2]52841
+ * // 안해봄
 
-#define LOG_ON false
+720378 : 2
+20378
+70378
+72378
+720/78
+720/38
+720/37
+
+72378
+2378
+7378
+72/78
+72/38
+72/37
+
+4177252841 : 4
+177252841
+477252841
+41/7252841
+41/7252841
+41/7752841
+41/7722841
+41/7725841
+41/7725241
+41/7725281
+41/7725284
+
+477252841
+77252841
+4/7252841
+4/7252841
+4/7752841
+4/7722841
+4/7725841
+4/7725241
+4/7725281
+
+77252841
+7252841
+7252841
+7752841
+772/2841
+772/5841
+772/5241
+772/5281
+
+7752841
+752841
+752841
+772841
+775841
+7752/41
+7752/81
+7752/84
+
+3879781299 : 2
+879781299
+3/79781299
+3/89781299
+3/87781299
+3/87981299
+3/87971299
+3/87978299
+3/87978199
+3/87978129
+3/87978129
+
+879781299
+79781299
+89781299
+87/781299
+87/981299
+87/971299
+87/978299
+87/978199
+87/978129
+87/978129
+
+
+느림
+
+---------------- 가장 작은숫자 2개를 뺐을때 가장 작은 수 선택
+4177252841 : 4
+477252841 * //1, 2
+417725284
+417752841
+417725841
+
+47725284
+47725841
+47752841 * // 1, 2
+
+4775284
+4775841 * // 1, 2
+
+477584
+775841 * // 1, 4
+
+-----------------
+190000002 : 3
+
+90000002 * // 0, 1
+19000002
+19000002
+19000002
+19000002
+19000002
+19000002
+
+9000002
+9000002
+9000002
+9000002
+9000002
+9000002 * // 0, 2
+9000000
+
+900002
+900002
+900002
+900002
+900002 * // 0, 2
+900000
+
+-------------------
+3879781299 : 2
+387978199
+387978299 * // 1, 2
+
+38797899
+87978299 * // 2, 3
+
+89781299 를 만족하지 못함. invalid solution
+**/
+
+constexpr auto LOG_ON = true;
 using namespace std;
 
-std::string find_rm_index_more_bigger(std::string const &answer) {
-  // 3124 에서 known_rm_idx 가 0 이라면, 3을 제외한 124 와
-  // (3)124, 3(1)24, 31(2)4, 312(4) 를 비교해서 값이 커지는 삭제 index 를
-  // 반환합니다.
-  auto values = std::vector<std::pair<int /*index*/, std::string /*value*/>>();
-  for (auto rm_idx = 0; rm_idx < answer.size(); ++rm_idx) {
-    auto value = std::string();
-    for (auto i = 0; i < answer.size(); ++i) {
-      if (i != rm_idx)
-        value.push_back(answer[i]);
-    }
-    if (LOG_ON)
-      std::cout << "comparing => " << value << std::endl;
-    values.push_back(std::make_pair(rm_idx, value));
-  }
-
-  std::sort(
-      std::begin(values), std::end(values),
-      [](std::pair<int, std::string> const &a,
-         std::pair<int, std::string> const &b) { return a.second > b.second; });
-
-  return values[0].second;
-}
-
 string solution(string number, int k) {
-  auto answer = std::string(number.begin() + k, number.end());
-  if (LOG_ON)
-    std::cout << "answer : " << answer << std::endl;
-  for (auto i = k - 1; i >= 0; --i) {
-    if (LOG_ON)
-      std::cout << i << "th => " << number[i] << std::endl;
-    auto val = answer.front();
-    auto compare = number[i];
-    if (val < compare) {
-      // 더 큰 값으로 치환
-      *(std::begin(answer)) = compare;
+	auto answer = number;
+	while (k--) {
+		answer.erase(0, 1);
+		for (int i = 0; i < number.size(); ++i) {
+			std::string compare = number;
+			compare.erase(i, 1);
+			if (LOG_ON) std::cout << "cmp : " << answer << std::endl;
+			if (answer <= compare) {
+				answer = std::move(compare);
+			}
+			else break;
+		}
+		number = answer;
+		if (LOG_ON) std::cout << std::endl;
+	}
 
-      if (LOG_ON)
-        std::cout << "answer ?= " << answer << std::endl;
-    } else if (val == compare) {
-      // 값이 같다면, 가지고 있는 값중에서 만들어질 수 가장 큰 값을 취함.
-      // 그리고 새로운 값을 0 번 index 에 prepend
-      answer = compare + find_rm_index_more_bigger(answer);
-      if (LOG_ON)
-        std::cout << "answer ?! " << answer << std::endl;
-    }
-  }
-
-  return std::string(std::begin(answer), std::end(answer));
+	return answer;
 }
 
-int main(int argc, char const *argv[]) {
-  std::cout << "result -> " << solution("1924", 2) << " expected -> "
-            << "94" << std::endl;
-  std::cout << "result -> " << solution("1231234", 3) << " expected -> "
-            << "3234" << std::endl;
-  std::cout << "result -> " << solution("4177252841", 4) << " expected -> "
-            << "775841" << std::endl;
-  std::cout << "result -> " << solution("190000002", 3) << " expected -> "
-            << "900002" << std::endl;
-  std::cout << "result -> " << solution("3879781299", 2) << " expected -> "
-            << "89781299" << std::endl;
-  std::cout << "result -> " << solution("4321", 1) << " expected -> "
-            << "432" << std::endl;
 
-  return 0;
+int main(int argc, char const* argv[]) {
+	std::cout << "result -> " << solution("190000002", 3) << " expected -> "
+		<< "900002" << std::endl;
+	std::cout << "result -> " << solution("4177252841", 4) << " expected -> "
+		<< "775841" << std::endl;
+	std::cout << "result -> " << solution("1924", 2) << " expected -> "
+		<< "94" << std::endl;
+	std::cout << "result -> " << solution("720378", 2) << " expected -> "
+		<< "7378" << std::endl;
+	std::cout << "result -> " << solution("1231234", 3) << " expected -> "
+		<< "3234" << std::endl;
+	std::cout << "result -> " << solution("3879781299", 2) << " expected -> "
+		<< "89781299" << std::endl;
+	std::cout << "result -> " << solution("4321", 1) << " expected -> "
+		<< "432" << std::endl;
+
+
+	return 0;
 }
