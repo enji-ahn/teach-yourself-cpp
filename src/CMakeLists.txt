@@ -26,6 +26,7 @@ add_subdirectory ("platforms/any/dfs_bfs-item_finder")
 add_subdirectory ("platforms/any/dfs_bfs-fill_puzzle")
 add_subdirectory ("platforms/any/greedy-gym_suit")
 add_subdirectory ("platforms/any/greedy-joystick")
+add_subdirectory ("platforms/any/greedy-big_number")
 
 if (WIN32)
   ADD_SUBDIRECTORY ("platforms/win/BitOrder")
