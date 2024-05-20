@@ -70,65 +70,53 @@ using namespace std;
 
 constexpr bool LOG_ON = true;
 
+using taken = bool;
 
-
-int solution(vector<int> people, int limit) {
+int solution(vector<int> people_, int limit) {
   int answer = 0;
+  auto people = vector<pair<int, taken>>();
+  for (auto& p : people_) { people.push_back(make_pair(p, false)); }
 
-  sort(begin(people), end(people));
+  sort(begin(people), end(people),
+	  [](pair<int, taken> const& a, pair<int, taken> const& b) {
+		  return b.first > a.first;
+	  }
+  );
 
-  while (people.size()) {
+  int from = 0;
+  int rfrom = people.size() - 1;
 
-    if (LOG_ON)
-      std::cout << "people size " << people.size() << std::endl;
-
-    auto first = begin(people);
-    auto last = end(people);
-
-    auto found = false;
-    while (first != --last) {
-      if (*first + *last <= limit) {
-        if (LOG_ON)
-          std::cout << "rm : " << *first << " and " << *last << std::endl;
-
-        people.erase(last);
-        if (LOG_ON)
-          std::cout << "last  erased size " << people.size() << std::endl;
-
-        people.erase(first);
-        if (LOG_ON)
-          std::cout << "first erased size " << people.size() << std::endl;
-
-        answer++;
-        found = true;
-        break;
+  while (from < rfrom) {
+      auto& first = people[from];
+      auto& last = people[rfrom];
+      if (first.first + last.first <= limit) {
+          first.second = true;
+          last.second = true;
+          from++;
+          rfrom--;
+          answer++;
       }
-    }
-
-    if (!found) {
-      if (LOG_ON)
-        std::cout << "rm : " << *first << std::endl;
-      answer++;
-      people.erase(first);
-    }
-
-    if (LOG_ON)
-      std::cout << "size : " << people.size() << std::endl;
+      else {
+          rfrom--;
+      }
   }
 
-  return answer;
+  for (auto& p : people) {
+      if (!p.second) answer++;
+  }
+
+  return answer ;
 }
 
 int main(int argc, char const *argv[]) {
-  std::cout << "result -> " << solution({70, 50, 80, 50}, 100)
+    std::cout << "result -> " << solution({ 70, 80, 50 }, 100) << " expected -> "
+        << 3 << std::endl;
+    std::cout << "result -> " << solution({70, 50, 80, 50}, 100)
             << " expected -> " << 3 << std::endl;
-  std::cout << "result -> " << solution({70, 80, 50}, 100) << " expected -> "
-            << 3 << std::endl;
   std::cout << "result -> " << solution({20, 60, 70, 80, 30}, 100)
             << " expected -> " << 3 << std::endl;
   std::cout << "result -> " << solution({40, 40, 40, 40, 50}, 200)
             << " expected -> " << 3 << std::endl;
-  return 0;
   std::cout << "result -> " << solution({60, 60, 51, 51, 100}, 100)
             << " expected -> " << 5 << std::endl;
   std::cout << "result -> " << solution({40}, 40) << " expected -> " << 1

@@ -219,37 +219,177 @@ number	k	return
 87978299 * // 2, 3	
 
 89781299 를 만족하지 못함. invalid solution
+
+--------------------
+가져올 갯수만큼 앞에서 빼고, 그중에 가장 작은 숫자를 버려감.
+4177252841 : 4
+417725 => 1 삭제
+47725+2
+47752 => 2 삭제. 가장 작은 숫자가 2개 이상이라면 가장 앞의 숫자 삭제
+47752+8
+47758 => 2 삭제
+47758+4
+77584 => 4 삭제. 가장 작은 숫자가 2개 이상이라면 가장 앞의 숫자 삭제
+77584+1
+775841 => (더이상 뒤 값이 없으므로) result
+
+3879781299 : 2
+38797812 => 1 삭제, 9 추가
+38797829
+38797899 => 2 삭제, 9 추가
+
+----------------------
+4 //-1
+1 //-4
+41 //
+
+47 //-1+7
+17 //-4+7
+41 //
+
+47 //-1
+477
+
+
+4177252841 : 4
+417725 => 에서 가장 큰 조합 확인
+x17725 => 17725
+4x7725 => 47725
+41x725 => 41725 => 47.. 보다 작으니 볼 필요 없음
+417x25 => 41725 => 47.. 보다 작으니 볼 필요 없음
+4177x5 => 41775 => 47.. 보다 작으니 볼 필요 없음
+41772x => 41772 => 47.. 보다 작으니 볼 필요 없음
+
+47725+2 => 에서 가장 큰 조합 확인
+x77252 => 77252
+4x7252 => 47252 => 7.. 보다 작으니 볼 필요 없음
+47x252 => 47252 => 7.. 보다 작으니 볼 필요 없음
+477x52 => 47752 => 7.. 보다 작으니 볼 필요 없음
+4772x2 => 47722 => 7.. 보다 작으니 볼 필요 없음
+47725x => 47725 => 7.. 보다 작으니 볼 필요 없음
+
+77252+8 => 에서 가장 큰 조합 확인
+
+---------------------
+4177252841 : 4
+41 : 4
+47 : 7
+77 : 77
+72 : 7
+75 : 7
+72 : 7
+
+41 : 4 /1
+47 : 7 /1
+77 : - /0
+772 vs 775 : 775 /1
+52 : 5 /1
+775841
+
+3879781299 : 2
+38 : 8
+87 : 8
+89781299
+
+190000002 : 3
+19 : 9
+90 : 9
+90 : 9
+900002
+
+1924 : 2
+19 : 9
+92 : 9
+94
+
+720378 : 2
+72 : 7
+70 : 7
+7378
+
+1231234 : 3
+12 : 2
+23 : 3
+31 : 3
+3234
+
+4321 : 1
+43 : 4
+421 x
+
+-----------
+
+4177252841 : 4
+
+41 : 4 (1 다음수가 1보다 크므로 stop)
+47 : 7
+77 : -
+72 : 7 (2 다음수가 2보다 크므로 stop)
+75 : 75 (5 다음수가 5보다 작으므로, 5 는 유지)
+52 : 5 (2 다음수가 2보다 크므로 stop)
+775841
+
+4321 : 1
+43/2 : 4 (3 다음수가 3보다 작으므로 3 은 유지)
+32/1 : 3 (2 다음수가 2보다 작으므로 2 는 유지)
+21/null : 2 (1 다음수는 없고, 삭제된 숫자가 없으므로 k 만큼 버림) 
+
+720378 : 2
+72/0 : 72
+20/3 : 2 /3
+23/7 : 3 / 2
+7378
+
+----------
+앞 숫자가 작다면 버림
+뒷 숫자가 작다면, 이어지는 숫자들중 커지는 숫자 바로 앞 숫자를 버림.
+4321 이라면 1 을 버림 => 432
+190000002 라면 2 바로 앞 0을 버림 => 19000002
+
+190000002 : 3
+1/9 : 90000002
+9/0 : 9000002
+9/0 : 900002
+
 **/
 
 constexpr auto LOG_ON = true;
 using namespace std;
 
 string solution(string number, int k) {
-	auto answer = number;
-	while (k--) {
-		answer.erase(0, 1);
-		for (int i = 0; i < number.size(); ++i) {
-			std::string compare = number;
-			compare.erase(i, 1);
-			if (LOG_ON) std::cout << "cmp : " << answer << std::endl;
-			if (answer <= compare) {
-				answer = std::move(compare);
+	auto skip = 0;
+	auto len = number.size() - k;
+	while (k) {
+		auto src = number[skip];
+		auto cmp = number[skip + 1];
+		auto next = number[skip + 2];
+		if (src != cmp) {
+			if (src < cmp) {
+				number.erase(skip, 1);
+				k--;
 			}
-			else break;
+			else {
+				if (cmp < next) {
+					number.erase(skip + 1, 1);
+					k--;
+				}
+				else skip++;
+			}
 		}
-		number = answer;
-		if (LOG_ON) std::cout << std::endl;
+		else skip++;
+
+		if (next == '\0') break;
 	}
 
-	return answer;
+	return string(std::begin(number), std::begin(number) + len);
 }
 
 
 int main(int argc, char const* argv[]) {
+	std::cout << "result -> " << solution("4321", 1) << " expected -> "
+		<< "432" << std::endl;
 	std::cout << "result -> " << solution("190000002", 3) << " expected -> "
 		<< "900002" << std::endl;
-	std::cout << "result -> " << solution("4177252841", 4) << " expected -> "
-		<< "775841" << std::endl;
 	std::cout << "result -> " << solution("1924", 2) << " expected -> "
 		<< "94" << std::endl;
 	std::cout << "result -> " << solution("720378", 2) << " expected -> "
@@ -258,9 +398,8 @@ int main(int argc, char const* argv[]) {
 		<< "3234" << std::endl;
 	std::cout << "result -> " << solution("3879781299", 2) << " expected -> "
 		<< "89781299" << std::endl;
-	std::cout << "result -> " << solution("4321", 1) << " expected -> "
-		<< "432" << std::endl;
-
+	std::cout << "result -> " << solution("4177252841", 4) << " expected -> "
+		<< "775841" << std::endl;
 
 	return 0;
 }
