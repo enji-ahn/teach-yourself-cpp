@@ -351,34 +351,48 @@ x77252 => 77252
 9/0 : 9000002
 9/0 : 900002
 
+4177252841 : 4
+41 : 477252841
+47 : 77252841
+772/5 : 7752841
+52 : 
 **/
 
 constexpr auto LOG_ON = true;
 using namespace std;
 
 string solution(string number, int k) {
-	auto skip = 0;
+	size_t skip = 0;
 	auto len = number.size() - k;
 	while (k) {
+		auto erased = false;
 		auto src = number[skip];
-		auto cmp = number[skip + 1];
-		auto next = number[skip + 2];
-		if (src != cmp) {
-			if (src < cmp) {
-				number.erase(skip, 1);
-				k--;
-			}
-			else {
+		auto index = skip + 1;
+		auto cmp = number[index];
+		if (src < cmp) {
+			number.erase(skip, 1);
+			k--;
+			erased = true;
+		}
+		else {
+			while (number[++index]) {
+				auto next = number[index];
 				if (cmp < next) {
-					number.erase(skip + 1, 1);
+					number.erase(index - 1, 1);
 					k--;
+					erased = true;
+					break;
 				}
-				else skip++;
+				else {
+					cmp = next;
+				}
 			}
 		}
-		else skip++;
 
-		if (next == '\0') break;
+		if (!erased) {
+			number.erase(number.size() - 1, 1);
+			k--;
+		}
 	}
 
 	return string(std::begin(number), std::begin(number) + len);
@@ -386,6 +400,8 @@ string solution(string number, int k) {
 
 
 int main(int argc, char const* argv[]) {
+	std::cout << "result -> " << solution("4177252841", 4) << " expected -> "
+		<< "775841" << std::endl;
 	std::cout << "result -> " << solution("4321", 1) << " expected -> "
 		<< "432" << std::endl;
 	std::cout << "result -> " << solution("190000002", 3) << " expected -> "
@@ -398,8 +414,6 @@ int main(int argc, char const* argv[]) {
 		<< "3234" << std::endl;
 	std::cout << "result -> " << solution("3879781299", 2) << " expected -> "
 		<< "89781299" << std::endl;
-	std::cout << "result -> " << solution("4177252841", 4) << " expected -> "
-		<< "775841" << std::endl;
 
 	return 0;
 }
