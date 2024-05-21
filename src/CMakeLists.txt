@@ -28,6 +28,7 @@ add_subdirectory ("platforms/any/greedy-gym_suit")
 add_subdirectory ("platforms/any/greedy-joystick")
 add_subdirectory ("platforms/any/greedy-big_number")
 add_subdirectory ("platforms/any/greedy-lifeboat")
+add_subdirectory ("platforms/any/greedy-island_bridge")
 
 if (WIN32)
   ADD_SUBDIRECTORY ("platforms/win/BitOrder")
