@@ -74,111 +74,111 @@ N	number	return
 ((2+2)+2)x2
 ((2+2)+2)/2
 
+--------------------------------
+1 개
+
+2
+
+2개 
+
+2+2
+2-2
+2*2
+2/2
+22
+
+3 개
+
+2+2+2
+2+2-2
+2+2*2
+2+2/2
+
+2-2+2
+2-2-2
+2-2*2
+2-2/2
+
+2*2+2
+2*2-2
+2*2*2
+2*2/2
+
+2/2+2
+2/2-2
+2/2*2
+2/2/2
+
+22+2
+22-2
+22*2
+22/2
+
+2+22
+2-22
+2*22
+2/22
+
 **/
 
 #define LOG_ON false
 using namespace std;
 
-int gen(int N, std::vector<int> prevs, int number, int expect) {
-  if (number == 1 && N != expect)
-    return gen(N, number + 1, expect);
+int gen(int N, int count, int expect) {
+	if (count > 8) return -1;
+	if (count == 1) return gen(N, count + 1, expect);
 
-  for (auto &p : prevs) {
-    if (p + N == expect)
-      return number;
-    if (P - N == expect)
-      return number;
-    if (P * N == expect)
-      return number;
-    if (P / N == expect)
-      return number;
-  }
+	// 2 => 1 calc 2 // nn, n+n, n-n, n*n, n/n
+	// 3 => (1 calc 2 result) calc 3 // nnn, nn{?}n, n+n{?}n, n-n{?}n, n*n{?}n, n/n{?}n
+}
+
+int gen2(int N, std::vector<long long> prevs, int number, int expect) {
+	if (number > 8) return -1;
+	if (N != expect) {
+		auto default_ = 0L;
+		for (auto i = 0; i < number+1; ++i) default_ = default_ * 10 + N;
+		std::vector<long long> news = { default_ };
+		for (auto& p : prevs) {
+			auto plus = p + N; news.push_back(plus);
+			if (plus == expect) {
+				return number + 1;
+			}
+			auto minus = p - N; news.push_back(minus);
+			if (minus == expect) {
+				return number + 1;
+			}
+			auto mul = p * N; news.push_back(mul);
+			if (mul == expect) {
+				return number + 1;
+			}
+			auto div = p / N; news.push_back(div);
+			if (div == expect) {
+				return number + 1;
+			}
+		}
+
+		return gen2(N, news, number + 1, expect);
+	}
+	else return number;
 }
 
 int solution(int N, int number) {
-  int answer = gen(N, 1, number);
-  return answer;
+	std::vector<long long> prevs = { N };
+	int answer = gen2(N, prevs, 1, number);
+	return answer;
 }
 
-int main(int argc, char const *argv[]) {
+int main(int argc, char const* argv[]) {
+	std::cout << "result -> " << solution(5, 12) << " expected -> " << 4
+		<< std::endl;
+	std::cout << "result -> " << solution(2, 11) << " expected -> " << 3
+		<< std::endl;
+	std::cout << "result -> " << solution(5, 31168) << " expected -> " << -1
+		<< std::endl;
 
-  std::cout << "result -> " << solution(5, 12) << " expected -> " << 4
-            << std::endl;
-  std::cout << "result -> " << solution(2, 11) << " expected -> " << 3
-            << std::endl;
-  std::cout << "result -> " << solution(5, 2) << "expected -> " << 4
-            << std::endl;
-  std::cout << "result -> " << solution(2, 11) << "expected -> " << 3
-            << std::endl;
-  std::cout << "result -> " << solution(5, 5) << "expected -> " << 1
-            << std::endl;
-  std::cout << "result -> " << solution(5, 10) << "expected -> " << 2
-            << std::endl;
-  std::cout << "result -> " << solution(5, 31168) << "expected -> " << -1
-            << std::endl;
-  std::cout << "result -> " << solution(1, 1121) << "expected -> " << 7
-            << std::endl;
-  std::cout << "result -> " << solution(5, 1010) << "expected -> " << 7
-            << std::endl;
-  std::cout << "result -> " << solution(3, 4) << "expected -> " << 3
-            << std::endl;
-  std::cout << "result -> " << solution(5, 5555) << "expected -> " << 4
-            << std::endl;
-  std::cout << "result -> " << solution(5, 5550) << "expected -> " << 5
-            << std::endl;
-  std::cout << "result -> " << solution(5, 20) << "expected -> " << 3
-            << std::endl;
-  std::cout << "result -> " << solution(5, 30) << "expected -> " << 3
-            << std::endl;
-  std::cout << "result -> " << solution(6, 65) << "expected -> " << 4
-            << std::endl;
-  std::cout << "result -> " << solution(5, 2) << "expected -> " << 3
-            << std::endl;
-  std::cout << "result -> " << solution(5, 4) << "expected -> " << 3
-            << std::endl;
-  std::cout << "result -> " << solution(1, 1) << "expected -> " << 1
-            << std::endl;
-  std::cout << "result -> " << solution(1, 11) << "expected -> " << 2
-            << std::endl;
-  std::cout << "result -> " << solution(1, 111) << "expected -> " << 3
-            << std::endl;
-  std::cout << "result -> " << solution(1, 1111) << "expected -> " << 4
-            << std::endl;
-  std::cout << "result -> " << solution(1, 11111) << "expected -> " << 5
-            << std::endl;
-  std::cout << "result -> " << solution(7, 7776) << "expected -> " << 6
-            << std::endl;
-  std::cout << "result -> " << solution(7, 7784) << "expected -> " << 5
-            << std::endl;
-  std::cout << "result -> " << solution(2, 22222) << "expected -> " << 5
-            << std::endl;
-  std::cout << "result -> " << solution(2, 22223) << "expected -> " << 7
-            << std::endl;
-  std::cout << "result -> " << solution(2, 22224) << "expected -> " << 6
-            << std::endl;
-  std::cout << "result -> " << solution(2, 11111) << "expected -> " << 6
-            << std::endl;
-  std::cout << "result -> " << solution(2, 11) << "expected -> " << 3
-            << std::endl;
-  std::cout << "result -> " << solution(2, 111) << "expected -> " << 4
-            << std::endl;
-  std::cout << "result -> " << solution(2, 1111) << "expected -> " << 5
-            << std::endl;
-  std::cout << "result -> " << solution(9, 36) << "expected -> " << 4
-            << std::endl;
-  std::cout << "result -> " << solution(9, 37) << "expected -> " << 6
-            << std::endl;
-  std::cout << "result -> " << solution(9, 72) << "expected -> " << 3
-            << std::endl;
-  std::cout << "result -> " << solution(3, 18) << "expected -> " << 3
-            << std::endl;
-  std::cout << "result -> " << solution(2, 1) << "expected -> " << 2
-            << std::endl;
-  std::cout << "result -> " << solution(4, 17) << "expected -> " << 4
-            << std::endl;
-  std::cout << "result -> " << solution(4, 1936) << "expected -> " << 4
-            << std::endl; // -> 44*44
-  std::cout << "result -> " << solution(4, 3872) << "expected -> " << 6
-            << std::endl; // -> (44+44)*44
-  return 0;
+	std::cout << "result -> " << solution(4, 1936) << " expected -> " << 4
+		<< std::endl; // -> 44*44
+	std::cout << "result -> " << solution(4, 3872) << " expected -> " << 6
+		<< std::endl; // -> (44+44)*44
+	return 0;
 }
