@@ -31,6 +31,7 @@ add_subdirectory ("platforms/any/greedy-lifeboat")
 add_subdirectory ("platforms/any/greedy-island_bridge")
 add_subdirectory ("platforms/any/dynamic_prog-express_with_N")
 add_subdirectory ("platforms/any/dynamic_prog-load_to_school")
+add_subdirectory ("platforms/any/dynamic_prog-int_piramid")
 
 if (WIN32)
   ADD_SUBDIRECTORY ("platforms/win/BitOrder")
